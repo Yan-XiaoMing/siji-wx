@@ -1,0 +1,24 @@
+{
+  "name": "siji",
+  "version": "1.0.0",
+  "description": "四季惠享",
+  "author": "yqm",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.3",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.8",
+    "require-directory": "^2.1.1",
+    "sequelize": "^5.21.7",
+    "sha1": "^1.1.1",
+    "validator": "^13.0.0",
+    "xml2js": "^0.4.23"
+  }
+}
