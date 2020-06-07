@@ -33,7 +33,7 @@ module.exports = message =>{
     else if(message.MsgType === 'voice'){
         options.msgType = 'voice';
         options.mediaId = message.MediaId;
-        console.log(message.Recognition);
+        console.log("用户说了:"+message.Recognition);
     }
     else if(message.MsgType === 'location'){
         content = `纬度:${message.Location_X} 经度:${message.Location_Y} 位置信息:${message.Label}`;

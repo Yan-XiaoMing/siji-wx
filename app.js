@@ -1,14 +1,9 @@
-const Koa = require('koa');
-const parser = require('koa-bodyparser');
-const catchError = require('./middlewares/exception')
+const express = require('express');
 const auth = require('./wechat/auth');
-const InitManager = require('./core/init');
 
-const app =new Koa();
+const app = express();
 
-InitManager.initCore(app);
-app.use(parser());
-app.use(catchError);
+
 app.use(auth())
 
 

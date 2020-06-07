@@ -12,33 +12,30 @@ const template = require('./template');
 const reply =  require('./reply');
 
 module.exports = () => {
-    return async (ctx ,next) => {
+    return async (req, res, next) => {
 
-        const token = config.token;
-        const signature = ctx.query.signature;
-        const nonce = ctx.query.nonce;
-        const timestamp = ctx.query.timestamp;
-        const echostr = ctx.query.echostr;
+        const {signature, echostr, timestamp, nonce} = req.query;
+        const {token} = config;
 
         const str = [token, timestamp, nonce].sort().join('');
 
         const sha = sha1(str);
 
-        if (ctx.method === 'GET') {
+        if (req.method === 'GET') {
             if (sha === signature) {
-                ctx.body = echostr;
+                res.send(echostr);
                 console.log('接口配置信息:success');
             } else {
                 console.log('error')
-                ctx.body="接口配置信息:error";
+                res.send("接口配置信息:error");
             }
-        } else if (ctx.method === 'POST') {
+        } else if (req.method === 'POST') {
             if (sha !== signature) {
                 //如果不是微信服务来的不处理
-                ctx.end('error');
+                res.end('error');
             }
-            // console.log(ctx.query);
-            const xmlData = await getUserDataAsync(ctx);
+            // console.log(req.query);
+            const xmlData = await getUserDataAsync(req);
             // console.log(xmlData);
             /* 
                 <xml>
@@ -78,10 +75,10 @@ module.exports = () => {
             const replyMessage = template(options);
             console.log(replyMessage);
 
-            ctx.body={replyMessage};
+            res.send(replyMessage);
             // ctx.end('');
         } else {
-            ctx.end('error')
+            res.end('error')
         }
 
     }
